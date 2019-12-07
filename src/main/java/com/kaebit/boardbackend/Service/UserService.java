@@ -3,13 +3,11 @@ package com.kaebit.boardbackend.Service;
 import com.kaebit.boardbackend.Exception.UserNotFoundException;
 import com.kaebit.boardbackend.Model.User;
 import com.kaebit.boardbackend.Repository.UserRepository;
-import org.apache.tomcat.jni.Error;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -23,28 +21,35 @@ public class UserService {
         return users;
     }
 
-    public User findByPk(String pk) {
-        User user = userRepository.findByPk(pk);
-        if(user == null) {
-            throw new UserNotFoundException("User", "pk", pk);
-        }
+    public User findById(String id) {
+        System.out.println(id);
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException());
         return user;
     }
 
-    public User updateByPk(String pk, User user) {
-        User updatedUser = userRepository.updateByPk(pk, user);
-        if(updatedUser == null) {
-            throw new UserNotFoundException("User", "pk", pk);
-        }
-        return updatedUser;
+    public User findByUser_id(String user_id) {
+        User user = userRepository.findByUser_id(user_id);
+        return user;
     }
 
-    public void deleteByPk(String pk) {
-        User user = userRepository.findByPk(pk);
-        if(user == null) {
-            throw new UserNotFoundException("User", "pk", pk);
-        }
+    public void updateUser_idById(String id, String user_id) {
+        userRepository.updateUser_idById(id, user_id);
+    }
 
-        userRepository.deleteByPk(user.getPk());
+    public void updatePasswordById(String id, String password) {
+        userRepository.updatePasswordById(id, password);
+    }
+
+    public void updateNameById(String id, String name) {
+        userRepository.updateNameById(id, name);
+    }
+
+    public void deleteById(String id) {
+        userRepository.deleteById(id);
+    }
+
+    public User save(User requestUser) {
+        User user = userRepository.save(requestUser);
+        return user;
     }
 }
