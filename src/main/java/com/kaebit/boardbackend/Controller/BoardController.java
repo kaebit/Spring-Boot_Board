@@ -76,4 +76,19 @@ public class BoardController {
         boardService.updateById(board_id, title, content);
         return "SUCCESS";
     }
+
+    @DeleteMapping
+    public String deleteBoard(@RequestHeader("accessToken") String accessToken, @RequestHeader("board_id") Integer board_id) {
+        String id = jwtTokenUtil.getUserIdFromToken(accessToken);
+        if(id == null) {
+            throw new TokenErrorException();
+        }
+        Board board = boardService.findById(board_id);
+        User user = userService.findById(id);
+        if(!user.equals(board.getUser())) {
+            throw new ForbiddenException();
+        }
+        boardService.deleteById(board_id);
+        return "SUCCESS";
+    }
 }
