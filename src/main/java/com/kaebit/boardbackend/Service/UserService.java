@@ -1,8 +1,8 @@
 package com.kaebit.boardbackend.Service;
 
 import com.kaebit.boardbackend.Exception.UserNotFoundException;
-import com.kaebit.boardbackend.Model.User;
-import com.kaebit.boardbackend.Repository.UserRepository;
+import com.kaebit.boardbackend.domain.User;
+import com.kaebit.boardbackend.domain.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
-package com.kaebit.boardbackend.Repository;
+package com.kaebit.boardbackend.domain;
 
-import com.kaebit.boardbackend.Model.User;
+import com.kaebit.boardbackend.domain.User;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

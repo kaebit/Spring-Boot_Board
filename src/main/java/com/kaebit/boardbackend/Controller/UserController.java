@@ -1,7 +1,7 @@
 package com.kaebit.boardbackend.Controller;
 
 import com.kaebit.boardbackend.Exception.*;
-import com.kaebit.boardbackend.Model.User;
+import com.kaebit.boardbackend.domain.User;
 import com.kaebit.boardbackend.Security.JwtTokenUtil;
 import com.kaebit.boardbackend.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

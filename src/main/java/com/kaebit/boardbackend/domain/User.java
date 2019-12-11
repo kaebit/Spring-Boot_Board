@@ -1,4 +1,4 @@
-package com.kaebit.boardbackend.Model;
+package com.kaebit.boardbackend.domain;
 
 import lombok.Builder;
 import lombok.Data;
@@ -24,7 +24,7 @@ public class User implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", unique = true)
     private String user_id;
 
     @Column(name = "password")

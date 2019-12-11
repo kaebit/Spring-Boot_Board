@@ -1,15 +1,15 @@
-package com.kaebit.boardbackend.Model;
+package com.kaebit.boardbackend.domain;
 
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Proxy;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Entity
 @Table(name = "board")
@@ -23,9 +23,8 @@ public class Board implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "user_id")
+    private String user_id;
 
     @Column(name = "title")
     private String title;
@@ -45,10 +44,14 @@ public class Board implements Serializable {
     private LocalDateTime updatedAt;
 
     @Builder
-    public Board(User user, String title, String content, String author) {
-        this.user = user;
+    public Board(String user_id, String title, String content, String author) {
+        this.user_id = user_id;
         this.title = title;
         this.content = content;
         this.author = author;
     }
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "board_id")
+    private Collection<BoardComment> boardComments;
 }

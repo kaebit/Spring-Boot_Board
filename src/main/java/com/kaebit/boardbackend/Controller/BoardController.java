@@ -3,8 +3,8 @@ package com.kaebit.boardbackend.Controller;
 import com.kaebit.boardbackend.Exception.ForbiddenException;
 import com.kaebit.boardbackend.Exception.TokenErrorException;
 import com.kaebit.boardbackend.Exception.WrongDataException;
-import com.kaebit.boardbackend.Model.Board;
-import com.kaebit.boardbackend.Model.User;
+import com.kaebit.boardbackend.domain.Board;
+import com.kaebit.boardbackend.domain.User;
 import com.kaebit.boardbackend.Security.JwtTokenUtil;
 import com.kaebit.boardbackend.Service.BoardService;
 import com.kaebit.boardbackend.Service.UserService;
@@ -57,7 +57,7 @@ public class BoardController {
         if(title == null || content == null) {
             throw new WrongDataException();
         }
-        Board newBoard = new Board(user, title, content, user.getName());
+        Board newBoard = new Board(user.getId(), title, content, user.getName());
         Board board = boardService.save(newBoard);
         return board;
     }
@@ -70,7 +70,7 @@ public class BoardController {
         }
         Board board = boardService.findById(board_id);
         User user = userService.findById(id);
-        if(!user.equals(board.getUser())) {
+        if(!user.getId().equals(board.getUser_id())) {
             throw new ForbiddenException();
         }
         boardService.updateById(board_id, title, content);
@@ -85,7 +85,7 @@ public class BoardController {
         }
         Board board = boardService.findById(board_id);
         User user = userService.findById(id);
-        if(!user.equals(board.getUser())) {
+        if(!user.getId().equals(board.getUser_id())) {
             throw new ForbiddenException();
         }
         boardService.deleteById(board_id);

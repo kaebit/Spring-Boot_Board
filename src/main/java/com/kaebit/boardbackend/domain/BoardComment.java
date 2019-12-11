@@ -1,4 +1,4 @@
-package com.kaebit.boardbackend.Model;
+package com.kaebit.boardbackend.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,9 +21,8 @@ public class BoardComment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "board_id")
-    private Board board;
+    @Column(name = "board_id")
+    private Integer board_id;
 
     @Column(name = "author")
     private String author;
@@ -37,8 +36,8 @@ public class BoardComment implements Serializable {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    public BoardComment(Board board, String author, String content) {
-        this.board = board;
+    public BoardComment(Integer board_id, String author, String content) {
+        this.board_id = board_id;
         this.author = author;
         this.content = content;
     }

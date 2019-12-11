@@ -1,8 +1,8 @@
 package com.kaebit.boardbackend.Service;
 
 import com.kaebit.boardbackend.Exception.BoardNotFoundException;
-import com.kaebit.boardbackend.Model.Board;
-import com.kaebit.boardbackend.Repository.BoardRepository;
+import com.kaebit.boardbackend.domain.Board;
+import com.kaebit.boardbackend.domain.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
