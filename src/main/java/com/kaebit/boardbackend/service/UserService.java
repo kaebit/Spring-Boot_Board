@@ -1,6 +1,6 @@
-package com.kaebit.boardbackend.Service;
+package com.kaebit.boardbackend.service;
 
-import com.kaebit.boardbackend.Exception.UserNotFoundException;
+import com.kaebit.boardbackend.exception.UserNotFoundException;
 import com.kaebit.boardbackend.domain.User;
 import com.kaebit.boardbackend.domain.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

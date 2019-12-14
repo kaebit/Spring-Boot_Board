@@ -1,9 +1,9 @@
-package com.kaebit.boardbackend.Controller;
+package com.kaebit.boardbackend.controller;
 
-import com.kaebit.boardbackend.Exception.*;
+import com.kaebit.boardbackend.exception.*;
 import com.kaebit.boardbackend.domain.User;
-import com.kaebit.boardbackend.Security.JwtTokenUtil;
-import com.kaebit.boardbackend.Service.UserService;
+import com.kaebit.boardbackend.security.JwtTokenUtil;
+import com.kaebit.boardbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

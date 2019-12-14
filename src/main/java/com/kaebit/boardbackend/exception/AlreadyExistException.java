@@ -1,4 +1,4 @@
-package com.kaebit.boardbackend.Exception;
+package com.kaebit.boardbackend.exception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

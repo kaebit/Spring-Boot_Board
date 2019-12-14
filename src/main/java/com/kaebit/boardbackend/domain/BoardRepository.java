@@ -21,7 +21,9 @@ public interface BoardRepository extends CrudRepository<Board, Integer> {
     @Query(value = "SELECT * FROM board WHERE user_id = :user_id", nativeQuery = true)
     List<Board> findByUserId(String user_id);
 
-    @Override
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM board WHERE id = :id", nativeQuery = true)
     void deleteById(Integer id);
 
     @Modifying
