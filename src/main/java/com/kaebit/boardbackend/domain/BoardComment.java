@@ -21,6 +21,9 @@ public class BoardComment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "user_id")
+    private String user_id;
+
     @Column(name = "board_id")
     private Integer board_id;
 
@@ -36,7 +39,8 @@ public class BoardComment implements Serializable {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    public BoardComment(Integer board_id, String author, String content) {
+    public BoardComment(String user_id, Integer board_id, String author, String content) {
+        this.user_id = user_id;
         this.board_id = board_id;
         this.author = author;
         this.content = content;
