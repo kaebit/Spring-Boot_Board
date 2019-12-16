@@ -6,16 +6,13 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Collection;
 
 @Entity
-@Table(name = "boardComment")
 @Data
 @NoArgsConstructor
-public class BoardComment implements Serializable {
-    private static final long serialVersionUID = 1L;
+@Table(name = "boardCommentReply")
+public class BoardCommentReply {
 
     @Id
     @Column(name = "id")
@@ -27,6 +24,9 @@ public class BoardComment implements Serializable {
 
     @Column(name = "board_id")
     private Integer board_id;
+
+    @Column(name = "boardComment_id")
+    private Integer boardComment_id;
 
     @Column(name = "author")
     private String author;
@@ -40,14 +40,11 @@ public class BoardComment implements Serializable {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    public BoardComment(String user_id, Integer board_id, String author, String content) {
+    public BoardCommentReply(String user_id, Integer board_id, Integer boardComment_id, String author, String content) {
         this.user_id = user_id;
         this.board_id = board_id;
+        this.boardComment_id = boardComment_id;
         this.author = author;
         this.content = content;
     }
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "boardComment_id")
-    private Collection<BoardCommentReply> boardCommentReplies;
 }
