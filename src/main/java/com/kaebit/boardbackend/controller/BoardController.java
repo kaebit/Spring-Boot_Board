@@ -1,5 +1,6 @@
 package com.kaebit.boardbackend.controller;
 
+import com.kaebit.boardbackend.domain.BoardCommentReply;
 import com.kaebit.boardbackend.exception.ForbiddenException;
 import com.kaebit.boardbackend.exception.TokenErrorException;
 import com.kaebit.boardbackend.exception.WrongDataException;
@@ -7,6 +8,7 @@ import com.kaebit.boardbackend.domain.Board;
 import com.kaebit.boardbackend.domain.BoardComment;
 import com.kaebit.boardbackend.domain.User;
 import com.kaebit.boardbackend.security.JwtTokenUtil;
+import com.kaebit.boardbackend.service.BoardCommentReplyService;
 import com.kaebit.boardbackend.service.BoardCommentService;
 import com.kaebit.boardbackend.service.BoardService;
 import com.kaebit.boardbackend.service.UserService;
@@ -28,6 +30,9 @@ public class BoardController {
 
     @Autowired
     BoardCommentService boardCommentService;
+
+    @Autowired
+    BoardCommentReplyService boardCommentReplyService;
 
     @Autowired
     JwtTokenUtil jwtTokenUtil;
@@ -141,5 +146,20 @@ public class BoardController {
         }
         boardCommentService.deleteById(boardComment.getId());
         return "SUCCESS";
+    }
+
+    @PostMapping(value = "/comment/reply")
+    public BoardCommentReply replyComment(@RequestHeader("accessToken") String accessToken, @RequestParam("board_id") Integer board_id, @RequestParam("comment_id") Integer comment_id, @RequestParam("content") String content) {
+        String id = jwtTokenUtil.getUserIdFromToken(accessToken);
+        if (id == null) {
+            throw new TokenErrorException();
+        }
+        User user = userService.findById(id);
+        Board board = boardService.findById(board_id);
+        BoardComment boardComment = boardCommentService.findById(comment_id);
+        BoardCommentReply replyComment = new BoardCommentReply(user.getId(), board.getId(), boardComment.getId(), user.getName(), content);
+        boardCommentReplyService.save(replyComment);
+        return replyComment;
+
     }
 }
