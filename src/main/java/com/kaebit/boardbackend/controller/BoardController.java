@@ -128,6 +128,9 @@ public class BoardController {
         Board board = boardService.findById(board_id);
         User user = userService.findById(id);
         BoardComment boardComment = boardCommentService.findById(comment_id);
+        if (!id.equals(boardComment.getUser_id())) {
+            throw new ForbiddenException();
+        }
         boardCommentService.updateById(comment_id, content);
 
         return "SUCCESS";
@@ -160,6 +163,5 @@ public class BoardController {
         BoardCommentReply replyComment = new BoardCommentReply(user.getId(), board.getId(), boardComment.getId(), user.getName(), content);
         boardCommentReplyService.save(replyComment);
         return replyComment;
-
     }
 }
